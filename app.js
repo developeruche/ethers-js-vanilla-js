@@ -10,7 +10,7 @@ const provider = new etherjs.providers.JsonRpcProvider(rpcUrl);
 const signer = signerProvider.getSigner();
 const tokenAddress = "0xC770d227Eb937D7D3A327e68180772571C24525F";
 
-let connectedWallet;
+
 const useContract = async (address, abi, isSigner = false) => {
   const providerSigner = new etherjs.providers.Web3Provider(window.ethereum);
   const signer = providerSigner.getSigner();
@@ -37,7 +37,6 @@ const getUserWallet = async () => {
   //   console.log(connectedWallet, "connected wallet");
 };
 
-console.log(abi, etherjs);
 
 export default {
   openCity,
@@ -66,23 +65,34 @@ function tokenTemplateUpdate(name, symbol, totalSupply) {
             </div>
         </div>
     </div>
-    <div>0.005</div>
+    <div>0.0</div>
 </div>`;
 }
 
-const getTokenDetails = async () => {
+async function getTokenDetails() {
+  loader.innerText = "Loading...";
   const token = await useContract(tokenAddress, abi);
-  console.log(token);
   try {
     const [name, symbol, totalSupply] = await Promise.all([
       token.name(),
       token.symbol(),
       token.totalSupply(),
     ]);
-    console.log(name, symbol, Number(totalSupply), "name of token");
+    return { name, symbol, totalSupply: Number(totalSupply) };
   } catch (error) {
+    errored.innerText = "Error Occurred!";
     console.log("error occurred", error);
+  } finally {
+    loader.innerText = "";
   }
-};
+}
 
-tokenDetails();
+async function InitData() {
+  const { name, symbol, totalSupply } = await getTokenDetails();
+  const template = tokenTemplateUpdate(name, symbol, totalSupply);
+  token.innerHTML = template;
+}
+
+InitData();
+
+// tokenDetails();
