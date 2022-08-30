@@ -1,5 +1,5 @@
 import abi from "./abi.js";
-import openCity from "./tab.js";
+import openTab from "./tab.js";
 const { ethers: etherjs } = ethers;
 
 const rpcUrl = "https://goerli.infura.io/v3/ba80361523fe423bb149026a490266f0";
@@ -9,7 +9,6 @@ const provider = new etherjs.providers.JsonRpcProvider(rpcUrl);
 
 const signer = signerProvider.getSigner();
 const tokenAddress = "0xC770d227Eb937D7D3A327e68180772571C24525F";
-
 
 const useContract = async (address, abi, isSigner = false) => {
   const providerSigner = new etherjs.providers.Web3Provider(window.ethereum);
@@ -37,9 +36,8 @@ const getUserWallet = async () => {
   //   console.log(connectedWallet, "connected wallet");
 };
 
-
 export default {
-  openCity,
+  openTab,
 };
 
 // elements
