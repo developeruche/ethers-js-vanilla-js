@@ -18,7 +18,8 @@
         <h1 class="text-center text-2xl m-2 ">
             
         Ethers-metamask Dapp
-        <button id="connectBtn">Connect Wallet</button>
+        <button id="connectBtn" class="border m-2 p-2 border-red-300">Connect Wallet</button>
+        <span id="userAddress"> </span>
         </h1>
 
         <div class="tab flex">
@@ -28,19 +29,7 @@
           
           <!-- Tab content -->
           <div id="London" class="tabcontent block">
-            <div class="flex justify-between items-center">
-                <div>
-                    <div class="flex items-center">
-                        <div class="p-2 token-thumbnail w-10 h-10"> 
-                            <img src="https://bafybeiekvvr4iu4bqxm6de5tzxa3yfwqptmsg3ixpjr4edk5rkp3ddadaq.ipfs.dweb.link/" alt="token-img" />  </div>
-                        <div>
-                            <p class="font-semibold">Ether</p>
-                            <p>$0.01</p>
-                        </div>
-                    </div>
-                </div>
-                <div>0.005</div>
-            </div>
+           <div id="token"></div>
             
             <!-- <h3>Tokens</h3>
     

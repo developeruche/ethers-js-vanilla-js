@@ -1,6 +1,7 @@
 // https://github.com/Uniswap/token-lists/blob/main/test/schema/example.tokenlist.json
 export default list = {
   name: "My Token List",
+
   tokens: [
     {
       chainId: 1,
