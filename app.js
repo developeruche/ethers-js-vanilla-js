@@ -10,12 +10,16 @@ const provider = new etherjs.providers.JsonRpcProvider(rpcUrl);
 const signer = signerProvider.getSigner();
 const tokenAddress = "0xC770d227Eb937D7D3A327e68180772571C24525F";
 
-const useContract = async (address, abi, isSigner = false) => {
+const useContract = (
+  address = tokenAddress,
+  contractAbi = abi,
+  isSigner = false
+) => {
   const providerSigner = new etherjs.providers.Web3Provider(window.ethereum);
   const signer = providerSigner.getSigner();
   const provider = new etherjs.providers.JsonRpcProvider(rpcUrl);
   const newProvider = isSigner ? signer : provider;
-  return new ethers.Contract(address, abi, newProvider);
+  return new ethers.Contract(address, contractAbi, newProvider);
 };
 
 // view functions
@@ -87,10 +91,42 @@ async function getTokenDetails() {
 
 async function InitData() {
   const { name, symbol, totalSupply } = await getTokenDetails();
-  const template = tokenTemplateUpdate(name, symbol, totalSupply);
+  const template = tokenTemplateUpdate(name, symbol, totalSupply / 10 ** 18);
   token.innerHTML = template;
 }
 
 InitData();
 
 // tokenDetails();
+
+/***
+ * @amt - Number
+ * @receiver - string
+ **/
+async function sendToken(address, amt) {
+  const contract = useContract(tokenAddress, abi, true);
+  // console.log(contract);
+  // const amount = new etherjs.utils.parseEthers();
+  const decimal = await getDecimals();
+  const parseUnit = new etherjs.utils.parseUnits(amt, decimal);
+  const txn = await contract.transfer(address, parseUnit);
+  console.log(txn, "transaction pending....");
+  sendTransaction.innerText = "Sending";
+  window.alert(`transaction pending....`);
+  const confirm = await txn.wait();
+  console.log("transaction ends", confirm);
+  window.alert(`${amt} CLT sent to ${address}`);
+  sendTransaction.innerText = "Send";
+}
+
+async function getDecimals() {
+  return await useContract().decimals();
+}
+
+sendTransaction.addEventListener("click", async () => {
+  const amount = amt.value;
+  const receiverAddress = receiver.value;
+  console.log(amount, receiverAddress);
+
+  await sendToken(receiver.value, amt.value);
+});
