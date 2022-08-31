@@ -1,6 +1,6 @@
 //https://www.w3schools.com/howto/howto_js_tabs.asp
 
-export default function openCity(evt, cityName) {
+export default function openTab(evt, cityName) {
   // Declare all variables
   let i, tabcontent, tablinks;
 
@@ -21,4 +21,4 @@ export default function openCity(evt, cityName) {
   evt.currentTarget.className += " active";
 }
 
-window.openCity = openCity;
+window.openTab = openTab;

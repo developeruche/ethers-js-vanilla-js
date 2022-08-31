@@ -37,6 +37,7 @@ const getUserWallet = async () => {
   let userAddress = await signer.getAddress();
   //   connectedWallet = userAddress;
   updateUserAddress(userAddress);
+  return userAddress;
   //   console.log(connectedWallet, "connected wallet");
 };
 
@@ -91,6 +92,7 @@ async function getTokenDetails() {
 
 async function InitData() {
   const { name, symbol, totalSupply } = await getTokenDetails();
+  // console.log(something);
   const template = tokenTemplateUpdate(name, symbol, totalSupply / 10 ** 18);
   token.innerHTML = template;
 }
@@ -105,8 +107,6 @@ InitData();
  **/
 async function sendToken(address, amt) {
   const contract = useContract(tokenAddress, abi, true);
-  // console.log(contract);
-  // const amount = new etherjs.utils.parseEthers();
   const decimal = await getDecimals();
   const parseUnit = new etherjs.utils.parseUnits(amt, decimal);
   const txn = await contract.transfer(address, parseUnit);
