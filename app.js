@@ -22,11 +22,6 @@ const useContract = (
   return new ethers.Contract(address, contractAbi, newProvider);
 };
 
-// view functions
-// new ethers.Contract(address, abi, provider)
-
-//state  mutating functions
-// new ethers.Contract(address, abi, signer)
 
 const connectWallet = async () => {
   await signerProvider.send("eth_requestAccounts");

@@ -1,1 +1,56 @@
 @import url(./tab.css);
+
+.token__list {
+    display: grid;
+    place-items: center;
+}
+
+#connect-btn {
+    padding: 10px;
+    background-color: black;
+    color: white;
+    margin-left: 30px;
+}
+
+.token__List__header {
+    display: flex;
+    padding: 20px;
+}
+
+.token__mainlist__item {
+    padding: 20px;
+}
+
+.token__mainlist__item__header {
+    display: flex;
+    flex-direction: column;
+}
+
+.token__mainlist__item__header input {
+    padding: 10px;
+    border: 1px solid black;
+    width: 100%;
+    margin-top: 10px;
+    width: 500px;
+}
+
+#send__button {
+    padding: 10px;
+    background-color: black;
+    color: white;
+    margin-top: 10px;
+    width: 500px;
+    margin-bottom: 10px;
+}
+
+.token__mainlist__body {
+    padding: 10px;
+}
+
+.token__mainlist__body__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border: 1px solid black;
+    margin: 7px;
+}
